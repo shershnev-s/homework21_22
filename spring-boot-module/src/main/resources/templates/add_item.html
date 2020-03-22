@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add item</title>
+    <h1>Please, add new item</h1>
+</head>
+<body>
+<form action="#" method="post" th:action="@{/add_item}">
+    <span>Name</span>
+    <!--<span th:errors="*{item_name}" th:if="${#fields.hasErrors('name')}">Name Error</span>-->
+    <br>
+    <input type="text" th:type="text" th:field="*{item.name}">
+    <br>
+    <span>Location</span>
+    <!--<span th:errors="*{item_description}" th:if="${#fields.hasErrors('item_description')}">Description Error</span>-->
+    <br>
+    <input type="text" th:type="text" th:field="*{item.description}">
+    <br>
+    <span>Price</span>
+    <!--<span th:errors="*{item_details_price}" th:if="${#fields.hasErrors('price')}">Price Error</span>-->
+    <br>
+    <input type="text" th:type="text" th:field="*{item.price}">
+    <br>
+<!--    <select th:field="*{shops}">
+        <option th:each="shop : ${shops}">
+            <td th:text="${shop.id}"></td>
+        </option>
+    </select>-->
+    <br>
+    <input type="submit">
+</form>
+<p></p>
+</body>
+</html>
+
+<!--
+<form action="#" method="post" th:action="@{/add_item}" th:object="${item}">
+    <span>Name</span>
+    <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Name Error</span>
+    <br>
+    <input type="text" th:type="text" th:field="*{name}">
+    <br>
+    <span>Location</span>
+    <span th:errors="*{description}" th:if="${#fields.hasErrors('description')}">Description Error</span>
+    <br>
+    <input type="text" th:type="text" th:field="*{description}">
+    <br>
+    <span>Price</span>
+    <span th:errors="*{price}" th:if="${#fields.hasErrors('price')}">Price Error</span>
+    <br>
+    <input type="text" th:type="text" th:field="*{price}">
+    <br>
+    <select th:field="*{shops}">
+        <option th:each="shop : ${shops}">
+            <td th:text="${shop.id}"></td>
+        </option>
+    </select>
+    <br>
+    <input type="submit">
+</form>-->
