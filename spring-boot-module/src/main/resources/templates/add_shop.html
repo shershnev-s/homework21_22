@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add shop</title>
+    <h1>Please, add new shop</h1>
+</head>
+<body>
+<form action="#" method="post" th:action="@{/add_shop}" th:object="${shop}">
+    <span>Name</span>
+    <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Name Error</span>
+    <br>
+    <input type="text" th:type="text" th:field="*{name}">
+    <br>
+    <span>Location</span>
+    <span th:errors="*{location}" th:if="${#fields.hasErrors('location')}">Location Error</span>
+    <br>
+    <input type="text" th:type="text" th:field="*{location}">
+    <br>
+    <input type="submit">
+</form>
+<p></p>
+<a href="${pageContext.request.contextPath}/documents" th:href="@{/items}">Back to documents</a>
+</body>
+</html>
