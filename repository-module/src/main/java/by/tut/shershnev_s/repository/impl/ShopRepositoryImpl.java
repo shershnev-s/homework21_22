@@ -7,7 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ShopRepositoryImpl extends GenericDaoImpl<Long, Shop> implements ShopRepository {
 
-    public ShopRepositoryImpl(){
-        setEntity(Shop.class);
-    }
 }

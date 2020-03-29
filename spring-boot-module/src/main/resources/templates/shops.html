@@ -16,15 +16,17 @@
     </thead>
     <tbody th:each="shop: ${shops}">
     <tr>
-        <form method="get" th:action="@{/add_doc}">
-            <td th:text="${shop.name}"></td>
-            <td th:text="${shop.location}"></td>
-            <td>
-                <input type="hidden" name="id" th:value="${shop.id}">
-            </td>
-        </form>
+        <td th:text="${shop.name}"></td>
+        <td th:text="${shop.location}"></td>
+        <td>
+            <input type="hidden" name="id" th:value="${shop.id}">
+        </td>
     </tr>
     </tbody>
 </table>
+<br>
+<a href="${pageContext.request.contextPath}/add_shop" th:href="@{/shops/add_shop}">Go add shop</a>
+<br>
+<br>
 </body>
 </html>

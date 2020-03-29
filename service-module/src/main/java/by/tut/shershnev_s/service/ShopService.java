@@ -11,4 +11,5 @@ public interface ShopService {
     void add(ShopDTO shopDTO);
 
     List<ShopDTO> findAll();
+
 }

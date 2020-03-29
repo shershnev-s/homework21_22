@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Price</td>
+        <td>ID</td>
+    </tr>
+    </thead>
+    <tbody th:each="item: ${items}">
+    <tr>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.description}"></td>
+        <td th:text="${item.price}"></td>
+        <td th:text="${item.id}"></td>
+        <td>
+            <form method="GET" th:action="@{/items/{id}/remove(id=${item.id})}"><input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

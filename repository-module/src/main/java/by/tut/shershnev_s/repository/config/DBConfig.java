@@ -1,4 +1,4 @@
-package by.tut.shershnev_s.web.config;
+package by.tut.shershnev_s.repository.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
