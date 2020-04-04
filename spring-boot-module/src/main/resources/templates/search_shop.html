@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Required shops</title>
+</head>
+<body>
+<h1>Required shops</h1>
+<table>
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Location</td>
+        <td>ID</td>
+    </tr>
+    </thead>
+    <tbody th:each="shop: ${shops_by_location}">
+    <tr>
+        <td th:text="${shop.name}"></td>
+        <td th:text="${shop.location}"></td>
+        <td th:text="${shop.id}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

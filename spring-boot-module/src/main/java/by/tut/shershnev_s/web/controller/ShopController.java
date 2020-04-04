@@ -28,7 +28,7 @@ public class ShopController {
     }
 
     @PostMapping("/add_shop")
-    public String addDocs(@Valid @ModelAttribute(name = "shop") ShopDTO shop, BindingResult errors, Model model) {
+    public String addShop(@Valid @ModelAttribute(name = "shop") ShopDTO shop, BindingResult errors, Model model) {
         if (errors.hasErrors()) {
             logger.warn("Attempt to save " + shop.getName() + " is unsuccessfully");
             logger.warn(errors.getAllErrors());
@@ -41,16 +41,23 @@ public class ShopController {
     }
 
     @GetMapping("/add_shop")
-    public String getAddDoc(Model model) {
+    public String getAddShop(Model model) {
         model.addAttribute("shop", new ShopDTO());
         return "add_shop";
     }
 
     @GetMapping
-    public String getDocs(Model model) {
+    public String getShops(Model model) {
         List<ShopDTO> shopDTOS = shopService.findAll();
         model.addAttribute("shops", shopDTOS);
+        model.addAttribute("shops_by_location", new ShopDTO());
         return "shops";
     }
 
+    @GetMapping("/search_shop")
+    public String findShops(@ModelAttribute(name = "shops_by_location") ShopDTO shopDTO, Model model) {
+        List<ShopDTO> shopDTOS = shopService.findByLocation(shopDTO.getLocation());
+        model.addAttribute("shops_by_location", shopDTOS);
+        return "search_shop";
+    }
 }

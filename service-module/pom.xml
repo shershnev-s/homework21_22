@@ -21,12 +21,6 @@
         <dependency>
             <groupId>by.tut.shershnev_s</groupId>
             <artifactId>repository-module</artifactId>
-            <version>1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>by.tut.shershnev_s</groupId>
-            <artifactId>repository-module</artifactId>
             <version>${repository-module.version}</version>
         </dependency>
         <dependency>

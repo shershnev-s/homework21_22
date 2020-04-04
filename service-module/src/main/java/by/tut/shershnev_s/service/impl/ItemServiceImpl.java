@@ -11,9 +11,13 @@ import by.tut.shershnev_s.service.model.ItemDTO;
 import by.tut.shershnev_s.service.model.ItemDetailsDTO;
 import by.tut.shershnev_s.service.model.ItemWithShopDTO;
 import by.tut.shershnev_s.service.model.ShopDTO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.invoke.MethodHandles;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +78,18 @@ public class ItemServiceImpl implements ItemService {
     @Transactional
     public void deleteById(Long id) {
         itemRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public List<ItemDTO> findBySeveralParams(String name, BigDecimal priceMin, BigDecimal priceMax) {
+        List<Item> items = itemRepository.findBySeveralParams(name, priceMin, priceMax);
+        List<ItemDTO> itemDTOS = new ArrayList<>();
+        for (Item item : items) {
+            ItemDTO itemDTO = convertItemsToDTO(item);
+            itemDTOS.add(itemDTO);
+        }
+        return itemDTOS;
     }
 
     private ItemWithShopDTO convertToItemWithShopDTO(Item item, List<ShopDTO> shopDTOS) {

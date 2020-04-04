@@ -2,6 +2,7 @@ package by.tut.shershnev_s.web.controller;
 
 import by.tut.shershnev_s.service.ItemService;
 import by.tut.shershnev_s.service.ShopService;
+import by.tut.shershnev_s.service.model.ItemAndPricesDTO;
 import by.tut.shershnev_s.service.model.ItemDTO;
 import by.tut.shershnev_s.service.model.ItemWithShopDTO;
 import by.tut.shershnev_s.service.model.ShopDTO;
@@ -60,7 +61,16 @@ public class ItemController {
     public String items(Model model) {
         List<ItemDTO> items = itemService.findAll();
         model.addAttribute("items", items);
+        model.addAttribute("itemsWithPrice", new ItemAndPricesDTO());
         return "items";
+    }
+
+    @GetMapping("/search_item")
+    public String findItems(@ModelAttribute(name = "itemsWithPrice") ItemAndPricesDTO itemAndPricesDTO, Model model) {
+        List<ItemDTO> itemDTOS = itemService.findBySeveralParams(itemAndPricesDTO.getName(),
+                itemAndPricesDTO.getPriceMin(), itemAndPricesDTO.getPriceMax());
+        model.addAttribute("itemsWithPrice", itemDTOS);
+        return "search_item";
     }
 
     @GetMapping("/{id}")

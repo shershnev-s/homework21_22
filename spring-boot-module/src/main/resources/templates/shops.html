@@ -24,6 +24,13 @@
     </tr>
     </tbody>
 </table>
+<h2>Search item by</h2>
+<form action="#" th:method="GET" th:action="@{/shops/search_shop}" th:object="${shops_by_location}">
+    <span>Name</span>
+    <input type="text" th:type="text" th:field="*{location}">
+    <br>
+    <input type="submit" value="search">
+</form>
 <br>
 <a href="${pageContext.request.contextPath}/add_shop" th:href="@{/shops/add_shop}">Go add shop</a>
 <br>

@@ -38,6 +38,18 @@ public class ShopServiceImpl implements ShopService {
         return shopDTOS;
     }
 
+    @Override
+    @Transactional
+    public List<ShopDTO> findByLocation(String location) {
+        List<Shop> shops = shopRepository.findByLocation(location);
+        List<ShopDTO> shopDTOS = new ArrayList<>();
+        for (Shop shop : shops) {
+            ShopDTO shopDTO = convertToDTO(shop);
+            shopDTOS.add(shopDTO);
+        }
+        return shopDTOS;
+    }
+
     private ShopDTO convertToDTO(Shop shop) {
         ShopDTO shopDTO = new ShopDTO();
         shopDTO.setId(shop.getId());

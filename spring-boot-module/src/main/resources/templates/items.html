@@ -29,6 +29,20 @@
 
     </tbody>
 </table>
+<h2>Search item by</h2>
+<form action="#" th:method="GET" th:action="@{/items/search_item}" th:object="${itemsWithPrice}">
+    <span>Name</span>
+    <input type="text" th:type="text" th:field="*{name}">
+    <br>
+    <span>PriceMin</span>
+    <input type="text" th:type="number" th:field="*{priceMin}">
+    <br>
+    <span>PriceMax</span>
+    <input type="text" th:type="number" th:field="*{priceMax}">
+    <br>
+    <input type="submit" value="search">
+</form>
+<br>
 <br>
 <a href="${pageContext.request.contextPath}/items/add_item" th:href="@{/items/add_item}">Go add item</a>
 <br>

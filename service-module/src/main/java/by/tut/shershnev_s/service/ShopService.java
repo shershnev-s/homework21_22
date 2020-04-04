@@ -12,4 +12,6 @@ public interface ShopService {
 
     List<ShopDTO> findAll();
 
+    List<ShopDTO> findByLocation(String location);
+
 }
