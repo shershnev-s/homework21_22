@@ -1,27 +1,26 @@
 package by.tut.shershnev_s.repository.impl;
 
 import by.tut.shershnev_s.repository.GenericDao;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.Serializable;
+import javax.persistence.Query;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 @Repository
 public abstract class GenericDaoImpl<I, T> implements GenericDao<I, T> {
 
-    private Class<T> entity;
+    protected Class<T> entity;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
-    public final void setEntity(Class<T> entity) {
-        this.entity = entity;
+    protected GenericDaoImpl() {
+        ParameterizedType generalSuperclass = (ParameterizedType) getClass()
+                .getGenericSuperclass();
+        this.entity = (Class<T>) generalSuperclass.getActualTypeArguments()[1];
     }
 
 
@@ -34,6 +33,23 @@ public abstract class GenericDaoImpl<I, T> implements GenericDao<I, T> {
     public List<T> findAll() {
         return entityManager.createQuery("from " + entity.getName())
                 .getResultList();
+    }
+
+    @Override
+    public T findById(I id) {
+        return entityManager.find(entity, id);
+    }
+
+    @Override
+    public void deleteById(I id) {
+        entityManager.remove(entityManager.find(entity, id));
+    }
+
+    @Override
+    public T findByName(String name) {
+        String hql = "FROM " + entity.getSimpleName() + " WHERE username LIKE '" + name + "'";
+        Query query = entityManager.createQuery(hql);
+        return (T) query.getSingleResult();
     }
 
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+</head>
+<body>
+<h1>Added items with price</h1>
+<table>
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Price</td>
+        <td>ID</td>
+    </tr>
+    </thead>
+    <tbody th:each="item: ${items}">
+    <tr>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.description}"></td>
+        <td th:text="${item.price}"></td>
+        <td th:text="${item.id}"></td>
+        <td>
+            <form method="GET" th:action="@{/items/{id}(id=${item.id})}"><input type="submit" value="Open"/></form>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<h2>Search item by</h2>
+<form action="#" th:method="GET" th:action="@{/items/search_item}" th:object="${itemsWithPrice}">
+    <span>Name</span>
+    <input type="text" th:type="text" th:field="*{name}">
+    <br>
+    <span>PriceMin</span>
+    <input type="text" th:type="number" th:field="*{priceMin}">
+    <br>
+    <span>PriceMax</span>
+    <input type="text" th:type="number" th:field="*{priceMax}">
+    <br>
+    <input type="submit" value="search">
+</form>
+<br>
+<br>
+<a href="${pageContext.request.contextPath}/items/add_item" th:href="@{/items/add_item}">Go add item</a>
+<br>
+<br>
+<a href="${pageContext.request.contextPath}/items/delete" th:href="@{/items/delete}">Go delete item</a>
+</body>
+</html>

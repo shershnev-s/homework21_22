@@ -1,12 +1,14 @@
 package by.tut.shershnev_s.service.model;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ItemAndDetailsDTO {
+public class ItemWithShopDTO {
     private Long id;
     private String name;
     private String description;
-    private BigDecimal price;
+    private ItemDetailsDTO itemDetails;
+    private List<ShopDTO> shops = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -32,11 +34,19 @@ public class ItemAndDetailsDTO {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public ItemDetailsDTO getItemDetails() {
+        return itemDetails;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setItemDetails(ItemDetailsDTO itemDetailsDTO) {
+        this.itemDetails = itemDetailsDTO;
+    }
+
+    public List<ShopDTO> getShops() {
+        return shops;
+    }
+
+    public void setShops(List<ShopDTO> shops) {
+        this.shops = shops;
     }
 }

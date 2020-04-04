@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "shop")
@@ -19,6 +20,7 @@ public class Shop {
     private String name;
     @Column
     private String location;
+
 
     public Long getId() {
         return id;
@@ -42,5 +44,19 @@ public class Shop {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shop shop = (Shop) o;
+        return Objects.equals(id, shop.id) &&
+                Objects.equals(location, shop.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, location);
     }
 }

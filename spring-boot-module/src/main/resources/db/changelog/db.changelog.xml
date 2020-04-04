@@ -44,4 +44,30 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="5" author="shershnev_s@tut.by">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(20)">
+                <constraints unique="true"/>
+            </column>
+            <column name="password" type="varchar(100)"/>
+            <column name="role" type="varchar(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="shershnev_s@tut.by">
+        <insert catalogName="hw21_22"
+                tableName="User">
+            <column name="username" value="USER"/>
+            <column name="password" value="$2y$12$80h8S.UW8dDw8StdxhxXG.rUb.eylrzYILrPAEkxxLCmJUE21wc6K"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert catalogName="hw21_22"
+                tableName="User">
+            <column name="username" value="ADMIN"/>
+            <column name="password" value="$2y$12$ozgHOTh2ZJ/I6usaZ2SrkunYQPtBNR9MrA2n8HnW963WH8mvropLi"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

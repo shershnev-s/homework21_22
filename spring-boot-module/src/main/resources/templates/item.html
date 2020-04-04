@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get item by id</title>
+</head>
+<body>
+<h1>Item by id</h1>
+ID:
+<span th:text="${item.id}"></span>
+<br>
+Name:
+<span th:text="${item.name}"></span>
+<br>
+Description:
+<span th:text="${item.description}"></span>
+<br>
+Price:
+<span th:text="${item.itemDetails.price}"></span>
+<br>
+ShopInfo:
+<br>
+<span th:each="shop : ${item.shops}">
+    <tr>
+        <td>Name  </td>
+        <td th:text="${shop.name}"></td>
+        <br>
+        <td>Location  </td>
+        <td th:text="${shop.location}"></td>
+        <br>
+    </tr>
+</span>
+<br>
+<br>
+<a href="${pageContext.request.contextPath}/items" th:href="@{/items}">Go back</a>
+</body>
+</html>

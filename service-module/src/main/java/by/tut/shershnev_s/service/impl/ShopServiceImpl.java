@@ -27,8 +27,9 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    @Transactional
     public List<ShopDTO> findAll() {
-         List<ShopDTO> shopDTOS = new ArrayList<>();
+        List<ShopDTO> shopDTOS = new ArrayList<>();
         List<Shop> shops = shopRepository.findAll();
         for (Shop shop : shops) {
             ShopDTO shopDTO = convertToDTO(shop);
@@ -37,6 +38,17 @@ public class ShopServiceImpl implements ShopService {
         return shopDTOS;
     }
 
+    @Override
+    @Transactional
+    public List<ShopDTO> findByLocation(String location) {
+        List<Shop> shops = shopRepository.findByLocation(location);
+        List<ShopDTO> shopDTOS = new ArrayList<>();
+        for (Shop shop : shops) {
+            ShopDTO shopDTO = convertToDTO(shop);
+            shopDTOS.add(shopDTO);
+        }
+        return shopDTOS;
+    }
 
     private ShopDTO convertToDTO(Shop shop) {
         ShopDTO shopDTO = new ShopDTO();
@@ -48,7 +60,6 @@ public class ShopServiceImpl implements ShopService {
 
     private Shop getObjectFromDTO(ShopDTO shopDTO) {
         Shop shop = new Shop();
-        shop.setId(shopDTO.getId());
         shop.setName(shopDTO.getName());
         shop.setLocation(shopDTO.getLocation());
         return shop;

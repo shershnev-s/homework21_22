@@ -7,56 +7,35 @@
     <h1>Please, add new item</h1>
 </head>
 <body>
-<form action="#" method="post" th:action="@{/add_item}">
+<form action="#" method="post" th:action="@{/items/add_item}" th:object="${item}">
     <span>Name</span>
-    <!--<span th:errors="*{item_name}" th:if="${#fields.hasErrors('name')}">Name Error</span>-->
-    <br>
-    <input type="text" th:type="text" th:field="*{item.name}">
-    <br>
-    <span>Location</span>
-    <!--<span th:errors="*{item_description}" th:if="${#fields.hasErrors('item_description')}">Description Error</span>-->
-    <br>
-    <input type="text" th:type="text" th:field="*{item.description}">
-    <br>
-    <span>Price</span>
-    <!--<span th:errors="*{item_details_price}" th:if="${#fields.hasErrors('price')}">Price Error</span>-->
-    <br>
-    <input type="text" th:type="text" th:field="*{item.price}">
-    <br>
-<!--    <select th:field="*{shops}">
-        <option th:each="shop : ${shops}">
-            <td th:text="${shop.id}"></td>
-        </option>
-    </select>-->
-    <br>
-    <input type="submit">
-</form>
-<p></p>
-</body>
-</html>
-
-<!--
-<form action="#" method="post" th:action="@{/add_item}" th:object="${item}">
-    <span>Name</span>
-    <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Name Error</span>
+    <span th:errors="*{name}">Name Error</span>
     <br>
     <input type="text" th:type="text" th:field="*{name}">
     <br>
     <span>Location</span>
-    <span th:errors="*{description}" th:if="${#fields.hasErrors('description')}">Description Error</span>
+    <span th:errors="*{description}">Description Error</span>
     <br>
     <input type="text" th:type="text" th:field="*{description}">
     <br>
     <span>Price</span>
-    <span th:errors="*{price}" th:if="${#fields.hasErrors('price')}">Price Error</span>
+    <span th:errors="*{price}">Price Error</span>
     <br>
     <input type="text" th:type="text" th:field="*{price}">
     <br>
-    <select th:field="*{shops}">
-        <option th:each="shop : ${shops}">
-            <td th:text="${shop.id}"></td>
-        </option>
+    <span>Shop</span>
+    <select th:field="*{shopId}">
+        <option th:each="shop : ${shops}" th:value="${shop.id}" th:text="${shop.name}"></option>
     </select>
     <br>
+    <br>
     <input type="submit">
-</form>-->
+</form>
+<br>
+<a href="${pageContext.request.contextPath}/items" th:href="@{/items}">Back to items</a>
+<br>
+<br>
+<a href="${pageContext.request.contextPath}/" th:href="@{/}">Go to home page</a>
+</body>
+</html>
+

@@ -7,8 +7,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,10 +29,18 @@ public class Item {
     @Column
     private String description;
     @OneToOne(fetch = FetchType.LAZY,
-    mappedBy = "item",
-    cascade = CascadeType.ALL,
-    orphanRemoval = true)
+            mappedBy = "item",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private ItemDetails itemDetails;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "item_shop",
+            joinColumns = {@JoinColumn(name = "item_id")},
+            inverseJoinColumns = {@JoinColumn(name = "shop_id")}
+    )
+    private List<Shop> shops = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -59,6 +72,14 @@ public class Item {
 
     public void setItemDetails(ItemDetails itemDetails) {
         this.itemDetails = itemDetails;
+    }
+
+    public List<Shop> getShops() {
+        return shops;
+    }
+
+    public void setShops(List<Shop> shops) {
+        this.shops = shops;
     }
 
     @Override

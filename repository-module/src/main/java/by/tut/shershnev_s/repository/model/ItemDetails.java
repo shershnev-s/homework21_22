@@ -23,10 +23,10 @@ public class ItemDetails {
     @GeneratedValue(generator = "generator")
     @Column(unique = true, nullable = false, name = "item_id")
     private Long itemId;
-    @Column
+    @Column(precision = 5, scale = 2)
     private BigDecimal price;
     @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @PrimaryKeyJoinColumn(name = "item_id")
     private Item item;
 
     public BigDecimal getPrice() {
